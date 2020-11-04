@@ -1,0 +1,36 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+    - release-*
+  paths:
+    include:
+    - 01.policy/*
+
+stages:
+- stage: A
+  displayName: Stage A
+  jobs:
+  - deployment: templateDeployment
+    pool:
+      vmImage: 'windows-latest'
+
+    environment: release
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'SKT_MG_stg'
+              scriptType: 'ps'
+              scriptLocation: 'scriptPath'
+              workingDirectory: '01.policy'
+              scriptPath: '01.policy/updatePolicies.ps1'
+              arguments: '-env stg'

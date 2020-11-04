@@ -1,0 +1,2 @@
+$acssp = az ad sp list --display-name AzureContainerService --query [].objectId --output tsv
+az role assignment create --assignee-object-id $acssp --role "b24988ac-6180-42a0-ab88-20f7382dd24c" --scope "/providers/Microsoft.Management/managementGroups/SKT"

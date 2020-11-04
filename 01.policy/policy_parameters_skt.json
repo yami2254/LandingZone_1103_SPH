@@ -1,0 +1,589 @@
+{
+  
+  "$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion":"1.0.0.0",
+  "parameters":{
+    "policyDefinitions": {
+      "value": [
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/22730e10-96f6-4aac-ad84-9383d35b5917",
+          "displayName": "Management ports should be closed on your virtual machines",
+          "name": "PA_201008_B_001",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/bd352bd5-2853-4985-bf0d-73806b4a5744",
+          "displayName": "IP Forwarding on your virtual machine should be disabled",
+          "name": "PA_201008_B_002",
+          "effect": "audit",
+          "parameters": {}
+        },         
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/06a78e20-9358-41c9-923c-fb736d382a4d",
+          "displayName": "Audit VMs that do not use managed disks",
+          "name": "PA_201008_B_003",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/34c877ad-507e-4c82-993e-3452a6e0ad3c",
+          "displayName": "Storage accounts should restrict network access",
+          "name": "PA_201008_B_004",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/b6e2945c-0b7b-40f5-9233-7a5323b5cdc6",
+          "displayName": "Network Watcher should be enabled",
+          "name": "PA_201008_B_005",
+          "effect": "audit",
+          "parameters": {
+            "listOfLocations": {
+              "value": [
+                  "koreacentral",
+                  "koreasouth"
+              ]
+            }
+          }
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/cf820ca0-f99e-4f3e-84fb-66e913812d21",
+          "displayName": "Diagnostic logs in Key Vault should be enabled",
+          "name": "PA_201008_B_006",
+          "effect": "audit",
+          "parameters": {}
+        },   
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/e372f825-a257-4fb8-9175-797a8a8627d6",
+          "displayName": "RDP access from the Internet should be blocked",
+          "name": "PA_201008_B_007",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/862e97cf-49fc-4a5c-9de4-40d4e2e7c8eb",
+          "displayName": "Azure Cosmos DB accounts should have firewall rules",
+          "name": "PA_201008_B_008",
+          "effect": "audit",
+          "parameters": {
+            "effect": {
+              "value": "Audit"
+            }
+          }
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/d0793b48-0edc-4296-a390-4c75d1bdfd71",
+          "displayName": "Container registries should not allow unrestricted network access",
+          "name": "PA_201008_B_009",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/e8eef0a8-67cf-4eb4-9386-14b0e78733d4",
+          "displayName": "Container registries should use private links",
+          "name": "PA_201008_B_010",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/0725b4dd-7e76-479c-a735-68e7ee23d5ca",
+          "displayName": "Public network access should be disabled for Cognitive Services accounts",
+          "name": "PA_201008_B_011",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/5c607a2e-c700-4744-8254-d77e7c9eb5e4",
+          "displayName": "External accounts with write permissions should be removed from your subscription",
+          "name": "PA_201008_B_012",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/5f76cf89-fbf2-47fd-a3f4-b891fa780b60",
+          "displayName": "External accounts with read permissions should be removed from your subscription",
+          "name": "PA_201008_B_013",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/9297c21d-2ed6-4474-b48f-163f75654ce3",
+          "displayName": "MFA should be enabled accounts with write permissions on your subscription",
+          "name": "PA_201008_B_014",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/aa633080-8b72-40c4-a2d7-d00c03e80bed",
+          "displayName": "MFA should be enabled on accounts with owner permissions on your subscription",
+          "name": "PA_201008_B_015",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/e3576e28-8b17-4677-84c3-db2990658d64",
+          "displayName": "MFA should be enabled on accounts with read permissions on your subscription",
+          "name": "PA_201008_B_016",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/e71308d3-144b-4262-b144-efdc3cc90517",
+          "displayName": "Subnets should be associated with a Network Security Group",
+          "name": "PA_201008_B_017",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/f6de0be7-9a8a-4b8a-b349-43cf02d22f7c",
+          "displayName": "Internet-facing virtual machines should be protected with network security groups",
+          "name": "PA_201008_B_018",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/1b8ca024-1d5c-4dec-8995-b1a932b41780",
+          "displayName": "Public network access on Azure SQL Database should be disabled",
+          "name": "PA_201008_B_019",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/b52376f7-9612-48a1-81cd-1ffe4b61032c",
+          "displayName": "Public network access should be disabled for PostgreSQL servers",
+          "name": "PA_201008_B_020",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/d9844e8a-1437-4aeb-a32c-0c992f056095",
+          "displayName": "Public network access should be disabled for MySQL servers",
+          "name": "PA_201008_B_021",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/fdccbe47-f3e3-4213-ad5d-ea459b2fa077",
+          "displayName": "Public network access should be disabled for MariaDB servers",
+          "name": "PA_201008_B_022",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/9daedab3-fb2d-461e-b861-71790eead4f6",
+          "displayName": "Access through Internet facing endpoint should be restricted",
+          "name": "PA_201008_B_023",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/2c89a2e5-7285-40fe-afe0-ae8654b92fab",
+          "displayName": "SSH access from the Internet should be blocked",
+          "name": "PA_201008_B_024",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/564feb30-bf6a-4854-b4bb-0d2d2d1e6c66",
+          "displayName": "Web Application Firewall (WAF) should be enabled for Application Gateway",
+          "name": "PA_201008_B_025",
+          "effect": "audit",
+          "parameters": {}
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/cd3aa116-8754-49c9-a813-ad46512ece54",
+          "displayName": "Inherit a tag from the resource group (serviceStat)",
+          "name": "PA_201019_B_001",
+          "effect": "deployIfNotExists",
+          "parameters": {
+            "tagName": {
+              "value": "serviceStat"
+            }
+          }
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/cd3aa116-8754-49c9-a813-ad46512ece54",
+          "displayName": "Inherit a tag from the resource group (serviceName)",
+          "name": "PA_201019_B_002",
+          "effect": "deployIfNotExists",
+          "parameters": {
+            "tagName": {
+              "value": "serviceName"
+            }
+          }
+        },
+        {
+          "id": "/providers/Microsoft.Authorization/policyDefinitions/cd3aa116-8754-49c9-a813-ad46512ece54",
+          "displayName": "Inherit a tag from the resource group (personalInformation)",
+          "name": "PA_201019_B_003",
+          "effect": "deployIfNotExists",
+          "parameters": {
+            "tagName": {
+              "value": "personalInformation"
+            }
+          }
+        }
+      ]
+    },
+    "customPolicyDefinitions": {
+      "value": [
+        {
+          "displayName": "Deny authority of Owner, Contributor, User access manager, Policy participant and Security manager.",
+          "name": "PA_201008_C_001",
+          "description": "Deny authority of Owner, Contributor, User access manager, Policy participant and Security manager.",
+          "rule": {
+            "if": {
+              "allOf": [
+                {
+                  "anyOf": [
+                    {
+                      "field": "Microsoft.Authorization/roleAssignments/roleDefinitionId",
+                      "contains": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+                    },
+                    {
+                      "field": "Microsoft.Authorization/roleAssignments/roleDefinitionId",
+                      "contains": "b24988ac-6180-42a0-ab88-20f7382dd24c"
+                    },
+                    {
+                      "field": "Microsoft.Authorization/roleAssignments/roleDefinitionId",
+                      "contains": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9"
+                    },
+                    {
+                      "field": "Microsoft.Authorization/roleAssignments/roleDefinitionId",
+                      "contains": "36243c78-bf99-498c-9df9-86d9f8d28608"
+                    },
+                    {
+                      "field": "Microsoft.Authorization/roleAssignments/roleDefinitionId",
+                      "contains": "fb1c8493-542b-48eb-b624-b4c8fea62acd"
+                    },
+                    {
+                      "field": "Microsoft.Authorization/roleAssignments/roleDefinitionId",
+                      "contains": "4939a1f6-9ae0-4e48-a1e0-f2cbe897382d"
+                    },
+                    {
+                      "field": "Microsoft.Authorization/roleAssignments/roleDefinitionId",
+                      "contains": "4d97b98b-1d4f-4787-a291-c67834d212e7"
+                    }
+                  ]
+                },
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Authorization/roleAssignments"
+                },
+                {
+                  "field": "Microsoft.Authorization/roleAssignments/principalType",
+                  "notIn": [
+                    "ServicePrincipal",
+                    "MSI",
+                    null
+                  ]
+                }
+              ]
+            },
+            "then": {
+              "effect": "deny"
+            }
+          },
+          "parameters": {}
+        },
+        {
+          "displayName": "Require a tag and its value on resource groups.(tag: serviceStat)",
+          "name": "PA_201027_C_001",
+          "description": "Enforces a required tag and its value on resource groups.(tag: 'serviceStat', value: ['inservice', 'staging', 'dev', 'poc'])",
+          "rule": {
+            "if": {
+              "allOf": [
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+                },
+                {
+                  "field": "tags['serviceStat']",
+                  "notin": ["inservice", "staging", "dev", "poc"]
+                }
+              ]
+            },
+            "then": {
+              "effect": "audit"
+            }
+          },
+          "parameters": {}
+        },
+        {
+          "displayName": "Require a tag and its value on resource groups.(tag: personalInformation)",
+          "name": "PA_201027_C_002",
+          "description": "Enforces a required tag and its value on resource groups.(tag: 'personalInformation', values: ['yes', 'no'])",
+          "rule": {
+            "if": {
+              "allOf": [
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+                },
+                {
+                  "field": "tags['personalInformation']",
+                  "notin": ["yes", "no"]
+                }
+              ]
+            },
+            "then": {
+              "effect": "audit"
+            }
+          },
+          "parameters": {}
+        },
+        {
+          "displayName": "Require a tag on resource groups.(tag: serviceName)",
+          "name": "PA_201027_C_003",
+          "description": "Enforces a required tag on resource groups.(tag: 'serviceName')",
+          "rule": {
+            "if": {
+              "allOf": [
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+                },
+                {
+                  "field": "tags['serviceName']",
+                  "exists": "false"
+                }
+              ]
+            },
+            "then": {
+              "effect": "audit"
+            }
+          },
+          "parameters": {}
+        },
+        {
+          "displayName": "Deploy Nsg Flow logs",
+          "name": "PA_201013_C_001",
+          "description": "Deploy Nsg Flow logs",
+          "rule": {
+            "if": {
+              "allOf": [
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Network/networkSecurityGroups"
+                }
+              ]
+            },
+            "then": {
+              "effect": "deployIfNotExists",
+              "details": {
+                "type": "Microsoft.Network/networkWatchers/flowlogs",
+                "resourceGroupName": "[if(empty(coalesce(field('Microsoft.Network/networkSecurityGroups/flowLogs'))), 'networkWatcherRG', split(first(field('Microsoft.Network/networkSecurityGroups/flowLogs[*].id')), '/')[4])]",
+                "name": "[if(empty(coalesce(field('Microsoft.Network/networkSecurityGroups/flowLogs[*].id'))), 'null/null', concat(split(first(field('Microsoft.Network/networkSecurityGroups/flowLogs[*].id')), '/')[8], '/', split(first(field('Microsoft.Network/networkSecurityGroups/flowLogs[*].id')), '/')[10]))]",
+                "existenceCondition": {
+                  "allOf": [
+                    {
+                      "field": "Microsoft.Network/networkWatchers/flowLogs/enabled",
+                      "equals": "true"
+                    },
+                    {
+                      "field": "Microsoft.Network/networkWatchers/flowLogs/storageId",
+                      "equals": "[parameters('env').storageId]"
+                    },
+                    {
+                      "field": "Microsoft.Network/networkWatchers/flowLogs/format.version",
+                      "equals": 2
+                    }
+                  ]
+                },
+                "roleDefinitionIds": [
+                  "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+                ],
+                "deployment": {
+                  "properties": {
+                    "mode": "incremental",
+                    "template": {
+                      "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                      "contentVersion": "1.0.0.0",
+                      "parameters": {
+                        "storageId": {
+                          "type": "String"
+                        },
+                        "networkWatcherRG": {
+                          "type": "String"
+                        },
+                        "networkWatcherName": {
+                          "type": "String"
+                        },
+                        "flowlogName": {
+                          "type": "String"
+                        },
+                        "location": {
+                          "type": "String"
+                        },
+                        "targetResource": {
+                          "type": "string"
+                        }
+                      },
+                      "resources": [
+                        {
+                          "type": "Microsoft.Resources/deployments",
+                          "name": "[concat('flowlogDeployment-', uniqueString(parameters('flowlogName')))]",
+                          "apiVersion": "2019-10-01",
+                          "resourceGroup": "[parameters('networkWatcherRG')]",
+                          "properties": {
+                            "mode": "incremental",
+                            "parameters": {},
+                            "template": {
+                              "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                              "contentVersion": "1.0.0.0",
+                              "parameters": {},
+                              "resources": [
+                                {
+                                  "type": "Microsoft.Network/networkWatchers/flowLogs",
+                                  "name": "[concat(parameters('networkWatcherName'), '/', parameters('flowlogName'))]",
+                                  "apiVersion": "2019-11-01",
+                                  "location": "[parameters('location')]",
+                                  "properties": {
+                                    "targetResourceId": "[parameters('targetResource')]",
+                                    "storageId": "[parameters('storageId')]",
+                                    "enabled": "true",
+                                    "retentionPolicy": {
+                                      "days": "0",
+                                      "enabled": "false"
+                                    },
+                                    "format": {
+                                      "type": "JSON",
+                                      "version": 2
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "parameters": {
+                      "storageId": {
+                        "value": "[parameters('env').storageId]"
+                      },
+                      "networkWatcherRG": {
+                        "value": "[if(empty(coalesce(field('Microsoft.Network/networkSecurityGroups/flowLogs'))), 'networkWatcherRG', split(first(field('Microsoft.Network/networkSecurityGroups/flowLogs[*].id')), '/')[4])]"
+                      },
+                      "networkWatcherName": {
+                        "value": "[if(empty(coalesce(field('Microsoft.Network/networkSecurityGroups/flowLogs'))), concat('NetworkWatcher_', field('location')), split(first(field('Microsoft.Network/networkSecurityGroups/flowLogs[*].id')), '/')[8])]"
+                      },
+                      "flowlogName": {
+                        "value": "[if(empty(coalesce(field('Microsoft.Network/networkSecurityGroups/flowLogs'))), if(greater(length(concat(field('name'), '-', resourceGroup().name)), 56), concat(substring(concat(field('name'), '-', resourceGroup().name), 0, 56), '-flowlog'), concat(field('name'), '-', resourceGroup().name, '-flowlog')), split(first(field('Microsoft.Network/networkSecurityGroups/flowLogs[*].id')), '/')[10])]"
+                      },
+                      "location": {
+                        "value": "[field('location')]"
+                      },
+                      "targetResource": {
+                        "value": "[concat(resourceGroup().id, '/providers/Microsoft.Network/networkSecurityGroups/', field('name'))]"
+                      }
+                    }
+                  }
+                }
+              }
+            }          
+          },
+          "parameters": {
+            "env": {
+              "type": "object"
+            }
+          }
+        },
+        {
+          "displayName": "Deny modification of diagnostic settings in the activity log",
+          "name": "PA_201027_C_005",
+          "description": "Deny modification of diagnostic settings in the activity log",
+          "rule": {
+            "if": {
+              "allOf": [
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Insights/diagnosticSettings"
+                },
+                {
+                  "count": {
+                    "field": "Microsoft.Insights/diagnosticSettings/logs[*]",
+                    "where": {
+                      "allof": [
+                        {
+                          "field": "Microsoft.Insights/diagnosticSettings/logs[*].Category",
+                          "in": [
+                            "Administrative",
+                            "Security",
+                            "ServiceHealth",
+                            "Alert",
+                            "Recommendation",
+                            "Policy",
+                            "Autoscale",
+                            "ResourceHealth"
+                          ]
+                        },
+                        {
+                          "field": "Microsoft.Insights/diagnosticSettings/logs[*].Enabled",
+                          "equals": "True"
+                        }
+                      ]
+                    }
+                  },
+                  "greaterOrEquals": 1
+                },
+                {
+                  "anyOf": [
+                    {
+                      "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
+                      "notEquals": "[parameters('env').storageAccountId]"
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
+                          "equals": "[parameters('env').storageAccountId]"
+                        },
+                        {
+                          "count": {
+                            "field": "Microsoft.Insights/diagnosticSettings/logs[*]",
+                            "where": {
+                              "allof": [
+                                {
+                                  "field": "Microsoft.Insights/diagnosticSettings/logs[*].Category",
+                                  "in": [
+                                    "Administrative",
+                                    "Security",
+                                    "ServiceHealth",
+                                    "Alert",
+                                    "Recommendation",
+                                    "Policy",
+                                    "Autoscale",
+                                    "ResourceHealth"
+                                  ]
+                                },
+                                {
+                                  "field": "Microsoft.Insights/diagnosticSettings/logs[*].Enabled",
+                                  "equals": "False"
+                                }
+                              ]
+                            }
+                          },
+                          "greaterOrEquals": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "then": {
+              "effect": "deny"
+            }
+          },
+          "parameters": {
+            "env": {
+              "type": "object"
+            }              
+          }
+        }
+      ]
+    }
+  }
+}

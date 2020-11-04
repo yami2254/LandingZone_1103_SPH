@@ -1,0 +1,123 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-08-01/managementGroupDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "managementGroupId": {
+      "type": "string"
+    },
+    "policyDefinitions": {
+      "type": "array"
+    },
+    "customPolicyDefinitions": {
+      "type": "array"
+    },
+    "env": {
+      "type": "object"
+    }
+  },
+  "variables": {
+    "envWapper": {
+      "env": {
+        "value": "[parameters('env')]"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Authorization/policyAssignments",
+      "name": "[if(equals(length(parameters('policyDefinitions')), 0), 'dummy', parameters('policyDefinitions')[copyIndex()].name)]",
+      "apiVersion": "2019-09-01",
+      "copy": {
+        "name": "PolicyAssignmentCount",
+        "count": "[length(parameters('policyDefinitions'))]"
+      },
+      "identity": {
+        "type": "[if(greater(length(parameters('policyDefinitions')), 0), if(equals(parameters('policyDefinitions')[copyIndex()].effect, 'deployIfNotExists'), 'SystemAssigned', 'None'), 'None')]"
+      },
+      "location": "[if(greater(length(parameters('policyDefinitions')), 0), if(equals(parameters('policyDefinitions')[copyIndex()].effect, 'deployIfNotExists'), 'KoreaCentral', ''), '')]",
+      "properties": {
+        "displayName": "[parameters('policyDefinitions')[copyIndex()].displayName]",
+        "policyDefinitionId": "[parameters('policyDefinitions')[copyIndex()].id]",
+        "parameters": "[parameters('policyDefinitions')[copyIndex()].parameters]"
+      }
+    },
+    {
+      "condition": "[if(equals(length(parameters('policyDefinitions')), 0), 'false', equals(parameters('policyDefinitions')[copyIndex()].effect, 'deployIfNotExists'))]",
+      "name": "[if(equals(length(parameters('policyDefinitions')), 0), 'dummy2', guid(parameters('policyDefinitions')[copyIndex()].displayName))]",
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-04-01-preview",
+      "copy": {
+        "name": "customRoleAssignmentCount",
+        "count": "[length(parameters('policyDefinitions'))]"
+      },
+      "properties": {
+        "roleDefinitionId": "[concat('/providers/Microsoft.Management/managementGroups/', parameters('managementGroupId'), '/providers/Microsoft.Authorization/roleAssignments/', 'b24988ac-6180-42a0-ab88-20f7382dd24c')]",
+        "principalType": "ServicePrincipal",
+        "principalId": "[if(greater(length(parameters('policyDefinitions')), 0), reference(resourceId('Microsoft.Authorization/policyAssignments/', parameters('policyDefinitions')[copyIndex()].name), '2020-09-01', 'Full').identity.principalId, '')]",
+        "scope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('managementGroupId'))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Authorization/policyAssignments/', if(equals(length(parameters('policyDefinitions')), 0), 'dummy', parameters('policyDefinitions')[copyIndex()].name))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Authorization/policyDefinitions",
+      "name": "[if(equals(length(parameters('customPolicyDefinitions')), 0), 'dummy3', guid('custom', parameters('customPolicyDefinitions')[copyIndex()].displayName))]",
+      "apiVersion": "2019-09-01",
+      "copy": {
+        "name": "customPolicyDefinitionCount",
+        "count": "[length(parameters('customPolicyDefinitions'))]"
+      },
+      "properties": {
+        "displayName": "[parameters('customPolicyDefinitions')[copyIndex()].displayName]",
+        "description": "[parameters('customPolicyDefinitions')[copyIndex()].description]",
+        "mode": "All",
+        "policyRule": {
+          "if": "[parameters('customPolicyDefinitions')[copyIndex()].rule.if]",
+          "then": "[parameters('customPolicyDefinitions')[copyIndex()].rule.then]"
+        },
+        "parameters": "[parameters('customPolicyDefinitions')[copyIndex()].parameters]"
+      }
+    },    
+    {
+      "type": "Microsoft.Authorization/policyAssignments",
+      "name": "[if(equals(length(parameters('customPolicyDefinitions')), 0), 'dummy4', parameters('customPolicyDefinitions')[copyIndex()].name)]",
+      "apiVersion": "2019-09-01",
+      "identity": {
+        "type": "[if(greater(length(parameters('customPolicyDefinitions')), 0), if(equals(parameters('customPolicyDefinitions')[copyIndex()].rule.then.effect, 'deployIfNotExists'), 'SystemAssigned', 'None'), 'None')]"
+      },
+      "location": "[if(greater(length(parameters('customPolicyDefinitions')), 0), if(equals(parameters('customPolicyDefinitions')[copyIndex()].rule.then.effect, 'deployIfNotExists'), 'KoreaCentral', ''), '')]",
+      "copy": {
+        "name": "customPolicyAssignmentCount",
+        "count": "[length(parameters('customPolicyDefinitions'))]"
+      },
+      "properties": {
+        "displayName": "[parameters('customPolicyDefinitions')[copyIndex()].displayName]",
+        "policyDefinitionId": "[concat('/providers/Microsoft.Management/managementGroups/', parameters('managementGroupId'), '/providers/Microsoft.Authorization/policyDefinitions/', guid('custom', parameters('customPolicyDefinitions')[copyIndex()].displayName))]",
+        "parameters": "[if(empty(parameters('customPolicyDefinitions')[copyIndex()].parameters), json('{}'), variables('envWapper'))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Authorization/policyDefinitions/', if(equals(length(parameters('customPolicyDefinitions')), 0), 'dummy3', guid('custom', parameters('customPolicyDefinitions')[copyIndex()].displayName)))]"
+      ]
+    },
+    {
+      "condition": "[if(greater(length(parameters('customPolicyDefinitions')), 0), equals(parameters('customPolicyDefinitions')[copyIndex()].rule.then.effect, 'deployIfNotExists'), 'false')]",
+      "name": "[if(equals(length(parameters('customPolicyDefinitions')), 0), 'dummy5', guid(parameters('customPolicyDefinitions')[copyIndex()].displayName))]",
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-04-01-preview",
+      "copy": {
+        "name": "customRoleAssignmentCount2",
+        "count": "[length(parameters('customPolicyDefinitions'))]"
+      },
+      "properties": {
+        "roleDefinitionId": "[concat('/providers/Microsoft.Management/managementGroups/', parameters('managementGroupId'), '/providers/Microsoft.Authorization/roleAssignments/', 'b24988ac-6180-42a0-ab88-20f7382dd24c')]",
+        "principalType": "ServicePrincipal",
+        "principalId": "[if(greater(length(parameters('customPolicyDefinitions')), 0), reference(resourceId('Microsoft.Authorization/policyAssignments/', parameters('customPolicyDefinitions')[copyIndex()].name), '2020-09-01', 'Full').identity.principalId, '')]",
+        "scope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('managementGroupId'))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Authorization/policyAssignments/', if(equals(length(parameters('customPolicyDefinitions')), 0), 'dummy4', parameters('customPolicyDefinitions')[copyIndex()].name))]"
+      ]
+    }
+  ]
+}

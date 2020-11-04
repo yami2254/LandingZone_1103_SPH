@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "roleDefinitions": {
+      "type": "array"
+    },
+    "assignableScopes": {
+      "type": "array"
+    }
+  },
+  "variables": {
+    
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Authorization/roleDefinitions",
+      "apiVersion": "2017-09-01",
+      "copy": {
+        "name": "definitionCount",
+        "count": "[length(parameters('roleDefinitions'))]"
+      },
+      "name": "[guid(subscription().id, parameters('roleDefinitions')[copyIndex()].roleName)]",
+      "properties": {
+        "roleName": "[parameters('roleDefinitions')[copyIndex()].roleName]",
+        "description": "[parameters('roleDefinitions')[copyIndex()].roleDescription]",
+        "type": "customRole",
+        "isCustom": true,
+        "permissions": [
+          {
+            "actions": "[parameters('roleDefinitions')[copyIndex()].actions]",
+            "notActions": "[parameters('roleDefinitions')[copyIndex()].notActions]"
+          }
+        ],
+        "assignableScopes": "[parameters('assignableScopes')]"
+      }
+    }    
+  ]
+}

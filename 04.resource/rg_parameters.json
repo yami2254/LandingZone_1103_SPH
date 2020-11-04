@@ -1,0 +1,50 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"group": {
+			"value": "nugu"
+		},
+		"env": {
+			"value": "stg"
+		},
+		"location": {
+			"value": "koreacentral"
+		},
+		"service": {
+			"value": "news"
+		},
+		"rgTags": {
+			"value": {
+				"Env": "dev",
+				"ServiceName": "nuguNews"
+			}
+		},
+		"vnetInfo": {
+			"value": [
+				{
+					"addressPrefixes": [
+						"100.64.0.0/24"
+					],
+					"subnets": [
+						{
+							"addressPrefix": "100.64.0.0/26"
+						},
+						{
+							"addressPrefix": "100.64.0.64/26"
+						},
+						{
+							"addressPrefix": "100.64.0.128/26"
+						},
+						{
+							"addressPrefix": "100.64.0.192/28"
+						}
+					],
+					"tags": {
+						"PersonalInformation": "No"
+					}
+				}
+			]
+		}
+	}
+}

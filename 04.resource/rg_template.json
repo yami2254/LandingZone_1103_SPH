@@ -1,0 +1,86 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "group": {
+        "type": "string"
+      },
+      "env": {
+        "type": "string"
+      },
+      "location": {
+        "type": "string"
+      },
+      "service": {
+        "type": "string"
+      },
+      "vnetInfo": {
+        "type": "array"
+      },
+      "rgTags": {
+        "type": "object"
+      }
+    },
+    "variables": {
+      "rgName": "[concat(parameters('group'), '-', parameters('env'), '-', parameters('location'), '-', parameters('service'), '-rg')]",
+      "vnetNmPrefix": "[concat(parameters('group'), '-', parameters('env'), '-', parameters('location'), '-')]"
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Resources/resourceGroups",
+        "apiVersion": "2018-05-01",
+        "name": "[variables('rgName')]",
+        "location": "[parameters('location')]",
+        "tags": "[parameters('rgTags')]",
+        "properties": {}
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2019-05-01",
+        "name": "VnetDeployment",
+        "resourceGroup": "[variables('rgName')]",          
+        "dependsOn": [
+          "[resourceId('Microsoft.Resources/resourceGroups/', variables('rgName'))]"
+        ],
+        "copy": {
+          "name": "vnetCount",
+          "count": "[length(parameters('vnetInfo'))]"
+        },
+        "properties": {
+          "mode": "Incremental",
+          "template": {
+            "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {},
+            "variables": {},
+            "resources": [
+              {
+                "name": "[concat(variables('vnetNmPrefix'), format('{0:000.##}', copyIndex(1)), '-vnet')]",
+                "type": "Microsoft.Network/virtualNetworks",
+                "apiVersion": "2019-11-01",
+                "location": "[parameters('location')]",
+                "tags": "[parameters('vnetInfo')[copyIndex()].tags]",
+                "properties": {
+                  "addressSpace": {
+                    "addressPrefixes": "[parameters('vnetInfo')[copyIndex()].addressPrefixes]"
+                  },
+                  "copy": [
+                    {
+                      "name": "subnets",
+                      "count": "[length(parameters('vnetInfo')[copyIndex()].subnets)]",
+                      "input": {
+                        "name": "[concat(variables('vnetNmPrefix'), parameters('service'), '-', format('{0:000.##}', copyIndex('subnets', 1)), '-subnet')]",
+                        "properties": {
+                          "addressPrefix": "[parameters('vnetInfo')[copyIndex()].subnets[copyIndex('subnets')].addressPrefix]"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+}
